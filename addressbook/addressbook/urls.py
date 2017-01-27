@@ -16,6 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+import contacts.views
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
+    url(r'^$', 
+        contacts.views.ListContactView.as_view(),
+        name='contacts-list',),
+    url(r'^new$', 
+        contacts.views.CreateContactView.as_view(),
+        name='contacts-new',),
 ]
