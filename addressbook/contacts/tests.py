@@ -41,7 +41,7 @@ class ContactListViewTests(TestCase):
         Contact.objects.create(first_name='Lancelot', last_name='the Brave')
         response = ListContactView.as_view()(request)
         self.assertEquals(response.context_data['object_list'].count(), 1)
-        
+
 # #######################################################
 #  integration tests
 # #######################################################
@@ -61,11 +61,16 @@ class ContactListIntegrationTests(LiveServerTestCase):
         Contact.objects.create(first_name='foo', last_name='bar')
         # make sure it's listed as <first> <last> on the list
         self.browser.get('{}{}'.format(self.live_server_url, '/'))
-        self.assertEqual(
-            self.browser.find_elements_by_css_selector('.contact')[0].text,
-            'foo bar'
+        self.assertIn(
+            'foo bar',
+            self.browser.find_elements_by_css_selector('.contact')[0].text
         )
-    
+        # make sure we have an edit link
+        self.assertIn(
+            '(edit)',
+            self.browser.find_elements_by_css_selector('.contact')[0].text
+        )
+
     def test_add_contact_linked(self):
 
         self.assert_(
@@ -81,8 +86,8 @@ class ContactListIntegrationTests(LiveServerTestCase):
         self.browser.find_element_by_id('id_last_name').send_keys('contact')
         self.browser.find_element_by_id('id_email').send_keys('test@example.com')
 
-        self.browser.find_element_by_id("save_contact").click()
-        self.assertEqual(
-            self.browser.find_elements_by_css_selector('.contact')[-1].text,
-            'test contact'
+        self.browser.find_element_by_id('save_contact').click()
+        self.assertIn(
+            'test contact',
+            self.browser.find_elements_by_css_selector('.contact')[-1].text
         )
