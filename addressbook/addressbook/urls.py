@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^edit/(?P<pk>\d+)/$',
         contacts.views.UpdateContactView.as_view(),
         name='contacts-edit',),
+    url(r'^edit/(?P<pk>\d+)/addresses$', contacts.views.EditContactAddressView.as_view(),
+        name='contacts-edit-addresses',),
     url(r'^delete/(?P<pk>\d+)/$',
         contacts.views.DeleteContactView.as_view(),
         name='contacts-delete',),

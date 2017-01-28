@@ -33,13 +33,13 @@
 </form>
 
 {% if contact.id %}
-{% comment %}
 <a href="{% url "contacts-edit-addresses" pk=contact.id %}">
   Edit Addresses
-</a>{% endcomment %}
+</a>
+<br>
 <a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
 {% endif %}
-
-<a href="{% url "contacts-list" %}">back to list</a>
+<br>
+<a href="{% url "contacts-list" %}">back to Contacts list</a>
 
 {% endblock %}

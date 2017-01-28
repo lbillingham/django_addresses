@@ -3,5 +3,17 @@
 {% block content %}
 <h1> {{ contact }}</h1>
 <p> Email: {{ contact.email }}</p>
-(<a href="{% url "contacts-edit" pk=contact.id %}">edit</a>)
+<ul>
+{% for address in contact.address_set.all %}
+   <li>{{ address.address }}<br/>
+       {{ address.city }} {{ address.state }}<br/>
+       {{ address.postal_code }}
+   </li>
+{% endfor %}
+</ul>
+<a href="{% url "contacts-list" %}">return to Contacts list</a>
+<br>
+<a href="{% url "contacts-edit" pk=contact.id %}">edit</a>
+<br>
+<a href="{% url "contacts-edit-addresses" pk=contact.id %}">edit addresses</a>
 {% endblock  %}
