@@ -21,11 +21,13 @@ import contacts.views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^$', 
+    url(r'^$',
         contacts.views.ListContactView.as_view(),
         name='contacts-list',),
-    url(r'^new$', 
+    url(r'^new$',
         contacts.views.CreateContactView.as_view(),
         name='contacts-new',),
+    url(r'^edit/(?P<pk>\d+)/$', contacts.views.UpdateContactView.as_view(),
+        name='contacts-edit',),
 ]
 urlpatterns += staticfiles_urlpatterns()
