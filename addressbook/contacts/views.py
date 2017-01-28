@@ -8,6 +8,7 @@ from django.views.generic import ListView
 from django.views.generic import UpdateView
 
 from contacts.models import Contact
+from contacts import forms
 
 # Create your views here.
 class ListContactView(ListView):
@@ -19,7 +20,7 @@ class CreateContactView(CreateView):
 
     model = Contact
     template_name = 'edit_contact.html'
-    fields = model.field_names()
+    form_class = forms.ContactForm
 
     def get_success_url(self):
         return reverse('contacts-list')
@@ -35,7 +36,7 @@ class UpdateContactView(UpdateView):
 
     model = Contact
     template_name = 'edit_contact.html'
-    fields = model.field_names()
+    form_class = forms.ContactForm
 
     def get_success_url(self):
         return reverse('contacts-list')
