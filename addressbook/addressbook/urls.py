@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import contacts.views
 
@@ -27,3 +28,4 @@ urlpatterns = [
         contacts.views.CreateContactView.as_view(),
         name='contacts-new',),
 ]
+urlpatterns += staticfiles_urlpatterns()
