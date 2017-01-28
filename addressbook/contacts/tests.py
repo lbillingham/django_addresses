@@ -5,6 +5,7 @@ from django.test.client import RequestFactory
 
 from selenium import webdriver
 
+from contacts.forms import ContactForm
 from contacts.models import Contact
 from contacts.views import ListContactView
 # #######################################################
@@ -85,9 +86,31 @@ class ContactListIntegrationTests(LiveServerTestCase):
         self.browser.find_element_by_id('id_first_name').send_keys('test')
         self.browser.find_element_by_id('id_last_name').send_keys('contact')
         self.browser.find_element_by_id('id_email').send_keys('test@example.com')
+        self.browser.find_element_by_id('id_confirm_email').send_keys('test@example.com')
 
         self.browser.find_element_by_id('save_contact').click()
         self.assertIn(
             'test contact',
             self.browser.find_elements_by_css_selector('.contact')[-1].text
         )
+
+class EditContactFormTests(TestCase):
+
+    def test_mismatch_email_is_invalid(self):
+        form = ContactForm(data={
+            'first_name': 'A',
+            'last_name': 'B',
+            'email': 'a@b.com',
+            'confirm_email': 'a@different_email.org',
+        })
+        self.assertFalse(form.is_valid())
+
+    def test_matching_email_is_valid(self):
+        form = ContactForm(data={
+            'first_name': 'A',
+            'last_name': 'B',
+            'email': 'a@b.com',
+            'confirm_email': 'a@b.com',
+        })
+        self.assertTrue(form.is_valid())
+
