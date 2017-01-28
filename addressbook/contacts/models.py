@@ -1,6 +1,5 @@
+from django.urls import reverse
 from django.db import models
-
-# Create your models here.
 
 
 class Contact(models.Model):
@@ -25,3 +24,6 @@ class Contact(models.Model):
         field_names = [f.name for f in cls._meta.get_fields()]
         wanted = [n for n in field_names if n not in reserved_field_names]
         return wanted
+
+    def get_absolute_url(self):
+       return reverse('contacts-view', kwargs={'pk': self.id})
