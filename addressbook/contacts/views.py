@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 # # from django.forms import ModelForm
 # from django.shortcuts import render
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
@@ -45,3 +47,15 @@ class UpdateContactView(UpdateView):
                                     kwargs={'pk': self.get_object().id})
 
         return context
+
+class DeleteContactView(DeleteView):
+
+    model = Contact
+    template_name = 'delete_contact.html'
+
+    def get_success_url(self):
+        return reverse('contacts-list')
+
+class ContactView(DetailView):
+    model = Contact
+    template_name = 'contact.html'
