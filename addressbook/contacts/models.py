@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.db import models
+from django.db.models.functions import Lower
 
 
 class Contact(models.Model):
@@ -12,6 +13,9 @@ class Contact(models.Model):
     )
 
     email = models.EmailField()
+
+    class Meta:
+        ordering = ('last_name',)
 
     def __str__(self):
         _str = ' '.join([self.first_name, self.last_name])
