@@ -3,9 +3,10 @@
 {% block content %}
 <h1> {{ contact }}</h1>
 <p> Email: {{ contact.email }}</p>
+<p> Address: </p>
 <ul>
    <li>{{ contact.address.first_line }}<br/>
-       {{ contact.address.city }} {{ contact.address.state }}<br/>
+       {{ contact.address.city }}, {{ contact.address.state }}<br/>
        {{ contact.address.postal_code }}
    </li>
 </ul>

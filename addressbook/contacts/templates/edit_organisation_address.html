@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Edit Organisation Addresses</h1>
+
+<p>Editing addresses for Organisation: {{ organisation }}</p>
+
+<form action="{% url "organisations-edit-addresses" pk=organisation.id %}"
+      method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Save" />
+    <a href="{% url "organisations-list" %}">cancel: return to Organisations list</a>
+    {{ form.management_form }}
+    {% for address_form in form %}
+
+        <ul>
+        {{ address_form.as_ul }}
+        </ul>
+
+    {% endfor %}
+
+</form>
+{% endblock %}

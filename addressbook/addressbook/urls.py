@@ -47,6 +47,8 @@ urlpatterns = [
         name='organisations-edit',),
     url(r'^edit/(?P<pk>\d+)/addresses$', contacts.views.EditContactAddressView.as_view(),
         name='contacts-edit-addresses',),
+    url(r'^edit/organisation(?P<pk>\d+)/addresses$', contacts.views.EditOrganisationAddressView.as_view(),
+        name='organisations-edit-addresses',),
     url(r'^delete/(?P<pk>\d+)/$',
         contacts.views.DeleteContactView.as_view(),
         name='contacts-delete',),

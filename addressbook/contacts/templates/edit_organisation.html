@@ -33,9 +33,9 @@
 </form>
 
 {% if organisation.id %}
-{% comment %}<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">
-  Edit Addresses
-</a>{% endcomment %}
+<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">
+  Edit Organisation's address
+</a>
 <br>
 <a href="{% url "organisations-delete" pk=organisation.id %}">Delete</a>
 {% endif %}

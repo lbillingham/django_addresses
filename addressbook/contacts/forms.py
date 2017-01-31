@@ -6,7 +6,8 @@ from django.forms.models import inlineformset_factory
 from contacts.models import (
     Contact,
     Address,
-    Organisation
+    Organisation,
+    OrganisationAddress
 )
 
 class ContactForm(forms.ModelForm):
@@ -44,4 +45,10 @@ ContactAddressFormSet = inlineformset_factory(
     Contact,
     Address,
     fields=Address.field_names()
+)
+
+OrganisationAddressFormSet = inlineformset_factory(
+    Organisation,
+    OrganisationAddress,
+    fields=OrganisationAddress.field_names()
 )
