@@ -32,9 +32,7 @@ class Contact(models.Model):
     def get_absolute_url(self):
        return reverse('contacts-view', kwargs={'pk': self.id})
 
-class Address(models.Model):
-
-    contact = models.OneToOneField(Contact)
+class BaseAddress(models.Model):
 
     first_line = models.CharField(
         max_length=255,
@@ -49,6 +47,9 @@ class Address(models.Model):
         max_length=20,
     )
 
+    class Meta:
+        abstract = True
+
 
     @classmethod
     def field_names(cls):
@@ -57,3 +58,9 @@ class Address(models.Model):
         field_names = [f.name for f in cls._meta.get_fields()]
         wanted = [n for n in field_names if n not in reserved_field_names]
         return wanted
+
+
+class Address(BaseAddress):
+
+    contact = models.OneToOneField(Contact)
+
