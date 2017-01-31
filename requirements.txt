@@ -1,1 +1,4 @@
+# python 3.5.2
+# installed using `conda` package manager
+# other packages installed with pip
 Django==1.10.5
