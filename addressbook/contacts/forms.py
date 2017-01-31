@@ -6,6 +6,7 @@ from django.forms.models import inlineformset_factory
 from contacts.models import (
     Contact,
     Address,
+    Organisation
 )
 
 class ContactForm(forms.ModelForm):
@@ -29,6 +30,11 @@ class ContactForm(forms.ModelForm):
                 self.cleaned_data.get('confirm_email')):
             raise ValidationError("email addresses must match")
         return self.cleaned_data
+
+class OrganisationForm(forms.ModelForm):
+    class Meta:
+        model = Organisation
+        fields = '__all__'
 
 
 

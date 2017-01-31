@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if organisation.id %}
+<h1>Edit Organisation</h1>
+{% else %}
+<h1>Add Organisation</h1>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+    <ul>
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% for field in form %}
+  <div id="{{ field.auto_id }}_container">
+    {{ field.help_text }}
+    <div>
+      {{ field.label_tag }} {{ field }}
+    </div>
+    <div id="{{ field.auto_id }}_errors">
+      {{ field.errors }}
+    </div>
+  </div>
+  {% endfor %}
+
+  <input id="save_organisation" type="submit" value="Save" />
+</form>
+
+{% comment %}{% if organisation.id %}
+<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">
+  Edit Addresses
+</a>
+<br>
+<a href="{% url "organisations-delete" pk=organisation.id %}">Delete</a>
+{% endif %}{% endcomment %}
+<br>
+{% comment %}<a href="{% url "organisations-list" %}">back to Organisations list</a>{% endcomment %}
+
+{% endblock %}
