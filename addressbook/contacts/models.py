@@ -80,7 +80,7 @@ class BaseAddress(models.Model):
         wanted = [n for n in field_names if n not in reserved_field_names]
         return wanted
 
-class OrgainsationAddress(BaseAddress):
+class OrganisationAddress(BaseAddress):
     organisation = models.OneToOneField(Organisation)
 
 class Address(BaseAddress):
