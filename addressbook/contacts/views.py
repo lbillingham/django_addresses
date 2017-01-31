@@ -81,15 +81,6 @@ class UpdateOrganisationView(AbstractUpdateView):
     template_name = 'edit_{}.html'.format(html_slug)
     form_class = forms.OrganisationForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        return context
-
-    def get_success_url(self):
-        retty = super().get_success_url()
-        print('####\n{}\n#####'.format(retty))
-        return retty
-
 
 class DeleteContactView(DeleteView):
 
@@ -105,7 +96,7 @@ class DeleteOrganisationView(DeleteView):
     template_name = 'delete_organisation.html'
 
     def get_success_url(self):
-        return reverse('contacts-list')
+        return reverse('organisations-list')
 
 class ContactView(DetailView):
     model = Contact
