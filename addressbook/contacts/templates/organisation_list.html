@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Organisations</h1>
+
+<ul>
+  {% for organisation in object_list %}
+    <li class="organisation">
+      <a href="{{ organisation.get_absolute_url }}">{{ organisation }}</a>
+      (<a href="{% url "organisations-edit" pk=organisation.id %}">edit</a>)
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url "organisations-new" %}">add organisation</a>
+{% endblock %}

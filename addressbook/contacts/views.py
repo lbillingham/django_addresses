@@ -7,30 +7,46 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
-from contacts.models import Contact
+from contacts.models import Contact, Orgainsation
 from contacts import forms
 
 # Create your views here.
+class OrganisationListView(ListView):
+    model = Orgainsation
+    template_name = 'organisation_list.html'
+
 class ListContactView(ListView):
     model = Contact
     template_name = 'contact_list.html'
 
 
-class CreateContactView(CreateView):
+class AbstractCreateView(CreateView):
+    html_slug = 'ERROR-ABSTRACT'
 
-    model = Contact
-    template_name = 'edit_contact.html'
-    form_class = forms.ContactForm
+    class Meta:
+        abstract = True
+
+    @property
+    def template_name(self):
+        return 'edit_{}.html'.format(self.html_slug)
 
     def get_success_url(self):
-        return reverse('contacts-list')
+        return reverse('{}s-list'.format(self.html_slug))
 
     def get_context_data(self, **kwargs):
 
-        context = super(CreateContactView, self).get_context_data(**kwargs)
-        context['action'] = reverse('contacts-new')
+        context = super().get_context_data(**kwargs)
+        context['action'] = reverse('{}s-new'.format(self.html_slug))
 
         return context
+
+class CreateContactView(AbstractCreateView):
+    model = Contact
+    html_slug = 'contact'
+    # template_name ='edit_{}.html'.format(html_slug)
+    form_class = forms.ContactForm
+
+
 
 class UpdateContactView(UpdateView):
 

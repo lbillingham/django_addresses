@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> {{ organisation }}</h1>
+<p> Email: {{ organisation.email }}</p>
+<ul>
+   <li>{{ organisation.address.first_line }}<br/>
+       {{ organisation.address.city }} {{ organisation.address.state }}<br/>
+       {{ organisation.address.postal_code }}
+   </li>
+</ul>
+<a href="{% url "organisations-list" %}">return to Organisation list</a>
+<a href="{% url "contact-list" %}">return to Contact list</a>
+<br>
+<a href="{% url "organisations-edit" pk=organisation.id %}">edit</a>
+<br>
+<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">edit addresses</a>
+{% endblock  %}

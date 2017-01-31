@@ -3,6 +3,17 @@ from django.db import models
 from django.db.models.functions import Lower
 
 
+class Orgainsation(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    class Meta:
+        ordering = ('name', )
+
+    def __str__(self):
+        _str = '{}'.format(self.name)
+        return _str
+
 class Contact(models.Model):
     max_name_len = 255
     first_name = models.CharField(
@@ -15,7 +26,7 @@ class Contact(models.Model):
     email = models.EmailField()
 
     class Meta:
-        ordering = ('last_name',)
+        ordering = ('last_name', 'first_name')
 
     def __str__(self):
         _str = ' '.join([self.first_name, self.last_name])
@@ -59,6 +70,8 @@ class BaseAddress(models.Model):
         wanted = [n for n in field_names if n not in reserved_field_names]
         return wanted
 
+class OrgainsationAddress(BaseAddress):
+    organisation = models.OneToOneField(Orgainsation)
 
 class Address(BaseAddress):
 

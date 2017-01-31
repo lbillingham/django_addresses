@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Organisation</h1>
+<p>Really want to delete the organisation {{ organisation }}</p>
+
+<form action="{% url "organisations-delete" pk=organisation.id %}" method="POST">
+    {% csrf_token %}
+
+    <input type="submit" value="Yup, delete." />
+    <a href="{% url "organisations-list" %}">Nah, cancel.</a>
+</form>
+{% endblock %}
