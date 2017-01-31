@@ -50,5 +50,8 @@ urlpatterns = [
     url(r'^delete/(?P<pk>\d+)/$',
         contacts.views.DeleteContactView.as_view(),
         name='contacts-delete',),
+    url(r'^delete/organisation(?P<pk>\d+)/$',
+        contacts.views.DeleteOrganisationView.as_view(),
+        name='organisations-delete',),
 ]
 urlpatterns += staticfiles_urlpatterns()
