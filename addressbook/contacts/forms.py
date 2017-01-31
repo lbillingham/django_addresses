@@ -52,3 +52,9 @@ OrganisationAddressFormSet = inlineformset_factory(
     OrganisationAddress,
     fields=OrganisationAddress.field_names()
 )
+
+OrganisationContactsFormSet = inlineformset_factory(
+    Organisation,
+    Contact,
+    fields=('first_name', 'last_name', 'email')
+)

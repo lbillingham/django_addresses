@@ -128,3 +128,13 @@ class EditOrganisationAddressView(UpdateView):
 
         # redirect to the Organisation view.
         return self.get_object().get_absolute_url()
+
+
+class EditOrganisationContactsView(UpdateView):
+    model = Organisation
+    template_name = 'edit_organisation_contacts.html'
+    form_class = forms.ContactForm
+
+    def get_success_url(self):
+        # redirect to the Organisation view.
+        return self.get_object().get_absolute_url()

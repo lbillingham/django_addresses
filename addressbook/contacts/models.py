@@ -24,7 +24,14 @@ class Organisation(models.Model):
     def get_absolute_url(self):
        return reverse('organisations-view', kwargs={'pk': self.id})
 
+
 class Contact(models.Model):
+    organisation = models.ForeignKey(
+        Organisation,
+        null=True,
+        blank=True
+    )
+
     max_name_len = 255
     first_name = models.CharField(
         max_length=max_name_len,
@@ -84,6 +91,5 @@ class OrganisationAddress(BaseAddress):
     organisation = models.OneToOneField(Organisation)
 
 class Address(BaseAddress):
-
     contact = models.OneToOneField(Contact)
 

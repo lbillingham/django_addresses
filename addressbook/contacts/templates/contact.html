@@ -10,6 +10,10 @@
        {{ contact.address.postal_code }}
    </li>
 </ul>
+<p> Organisation: </p>
+<ul>
+    <li> {{ contact.organisation.name }} </li>
+</ul>
 <a href="{% url "contacts-list" %}">return to Contacts list</a>
 <br>
 <a href="{% url "contacts-edit" pk=contact.id %}">edit</a>

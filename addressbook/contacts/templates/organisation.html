@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1> {{ organisation }}</h1>
-<p> Email: {{ organisation.email }}</p>
+<p>Email: {{ organisation.email }}</p>
 <p>Address:</p>
 <ul>
    <li>{{ organisation.organisationaddress.first_line }}<br/>
@@ -10,6 +10,16 @@
        {{ organisation.organisationaddress.postal_code }}
    </li>
 </ul>
+<p>People:</p>
+<ul>
+  {% for contact in organisation.contact_set.all %}
+    <li class="contact">
+      <a href="{{ contact.get_absolute_url }}">{{ contact }}</a>
+      (<a href="{% url "contacts-edit" pk=contact.id %}">edit</a>)
+    </li>
+  {% endfor %}
+</ul>
+
 <a href="{% url "organisations-list" %}">return to Organisation list</a>
 <br>
 <a href="{% url "contacts-list" %}">return to Contact list</a>
