@@ -34,7 +34,7 @@ class Contact(models.Model):
 
 class Address(models.Model):
 
-    contact = models.ForeignKey(Contact)
+    contact = models.OneToOneField(Contact)
     address_type = models.CharField(
         max_length=10,
     )

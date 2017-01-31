@@ -4,12 +4,10 @@
 <h1> {{ contact }}</h1>
 <p> Email: {{ contact.email }}</p>
 <ul>
-{% for address in contact.address_set.all %}
-   <li>{{ address.address }}<br/>
-       {{ address.city }} {{ address.state }}<br/>
-       {{ address.postal_code }}
+   <li>{{ contact.address.address }}<br/>
+       {{ contact.address.city }} {{ contact.address.state }}<br/>
+       {{ contact.address.postal_code }}
    </li>
-{% endfor %}
 </ul>
 <a href="{% url "contacts-list" %}">return to Contacts list</a>
 <br>
