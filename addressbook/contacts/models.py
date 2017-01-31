@@ -36,7 +36,7 @@ class Address(models.Model):
 
     contact = models.OneToOneField(Contact)
 
-    address = models.CharField(
+    first_line = models.CharField(
         max_length=255,
     )
     city = models.CharField(
