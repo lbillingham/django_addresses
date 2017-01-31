@@ -35,9 +35,6 @@ class Contact(models.Model):
 class Address(models.Model):
 
     contact = models.OneToOneField(Contact)
-    address_type = models.CharField(
-        max_length=10,
-    )
 
     address = models.CharField(
         max_length=255,
@@ -52,8 +49,6 @@ class Address(models.Model):
         max_length=20,
     )
 
-    class Meta:
-        unique_together = ('contact', 'address_type',)
 
     @classmethod
     def field_names(cls):
