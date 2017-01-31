@@ -1,9 +1,8 @@
 from django.urls import reverse
 from django.db import models
-from django.db.models.functions import Lower
 
 
-class Orgainsation(models.Model):
+class Organisation(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
 
@@ -13,6 +12,17 @@ class Orgainsation(models.Model):
     def __str__(self):
         _str = '{}'.format(self.name)
         return _str
+
+    @classmethod
+    def field_names(cls):
+        """return field names as strings"""
+        reserved_field_names = ['id']
+        field_names = [f.name for f in cls._meta.get_fields()]
+        wanted = [n for n in field_names if n not in reserved_field_names]
+        return wanted
+
+    def get_absolute_url(self):
+       return reverse('organisations-view', kwargs={'pk': self.id})
 
 class Contact(models.Model):
     max_name_len = 255
@@ -71,7 +81,7 @@ class BaseAddress(models.Model):
         return wanted
 
 class OrgainsationAddress(BaseAddress):
-    organisation = models.OneToOneField(Orgainsation)
+    organisation = models.OneToOneField(Organisation)
 
 class Address(BaseAddress):
 

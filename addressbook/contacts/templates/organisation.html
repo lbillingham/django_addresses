@@ -10,9 +10,10 @@
    </li>
 </ul>
 <a href="{% url "organisations-list" %}">return to Organisation list</a>
-<a href="{% url "contact-list" %}">return to Contact list</a>
+<br>
+<a href="{% url "contacts-list" %}">return to Contact list</a>
 <br>
 <a href="{% url "organisations-edit" pk=organisation.id %}">edit</a>
 <br>
-<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">edit addresses</a>
+{% comment %}<a href="{% url "organisations-edit-addresses" pk=organisation.id %}">edit addresses</a>{% endcomment %}
 {% endblock  %}

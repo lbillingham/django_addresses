@@ -32,14 +32,14 @@
   <input id="save_organisation" type="submit" value="Save" />
 </form>
 
-{% if organisation.id %}
+{% comment %}{% if organisation.id %}
 <a href="{% url "organisations-edit-addresses" pk=organisation.id %}">
   Edit Addresses
 </a>
 <br>
 <a href="{% url "organisations-delete" pk=organisation.id %}">Delete</a>
-{% endif %}
+{% endif %}{% endcomment %}
 <br>
-<a href="{% url "organisations-list" %}">back to Contacts list</a>
+{% comment %}<a href="{% url "organisations-list" %}">back to Organisations list</a>{% endcomment %}
 
 {% endblock %}
